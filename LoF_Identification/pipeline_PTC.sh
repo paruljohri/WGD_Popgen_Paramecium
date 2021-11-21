@@ -75,22 +75,23 @@ Step10: Get the list of all genes in every species and the corresponding LoF sta
 #includes CNV genes with large deletions
 #output: Paramecium/CNSGenomes/${species}/all_genes_cnv_2000.char
 
+Step11: to test 2 things- if the coverage of such genes is higher or if they are over-represented in strin-specific dulications:
+>> python check_coverage_nonfunc_genes.py caudatum 3_subset
+#output: Paramecium/CNSGenomes/${species}/all_genes_depth.char
 
-python check_coverage_nonfunc_genes.py caudatum 3_subset
+Step12:This is to filter the all_genes_char file to exclude genes
+#1. with too low or too high coverage
+#2. present as tandem duplicates
+#3. present as duplicates in CNVnator
+>> python get_all_genes_char_filtered.py caudatum
+#output: Paramecium/CNSGenomes/${species}/all_genes_filtered.char
+>> python get_all_genes_char_filtered.py caudatum #run the same script after internally changing the input file to _cnv_2000
+#output: Paramecium/CNSGenomes/${species}/all_genes_cnv_2000_filtered.char
 
-python get_all_genes_char_filtered.py caudatum
-python get_all_genes_char_filtered.py caudatum #do the same thing after changing the script to _cnv
+Step13: to exclude genes that have noSTOP polymorphism
+>> python get_all_genes_char_filtered_exclude_noSTOP.py caudatum 
+#output: Paramecium/CNSGenomes/${species}/all_genes_filtered_exclude_noSTOP.char
 
-python get_all_genes_char_filtered_exclude_noSTOP.py caudatum #to exclude genes that have noSTOP polymorphism
-
-python get_all_genes_samples.py caudatum 3_subset
-
-get_ortho_para_states.py
-
-#add the information of single genes that are only present in that particular species. Absent everywhere else.
-
-cd VCF_analysis/programs/
-python get_sfs_from_vcf_corrected.py biaurelia
 
 
 
