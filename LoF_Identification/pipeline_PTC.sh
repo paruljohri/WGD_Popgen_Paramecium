@@ -41,7 +41,7 @@ Step6:
 
 
 #get genes that are mistranslated as a result of indels:
-python
+#python
 
 Step7:
 #get the genes with deletions, CNVnator:
@@ -51,16 +51,18 @@ Step8: get characteristics of genes that have Lof variants:
 >> get_PTC_charc.py
 #output: Paramecium/CNSGenomes/PTC_analysis/${species}_PTC_genes.char
 >> get_noSTART_charc.py
+#output: Paramecium/CNSGenomes/noSTART_analysis/${species}_noSTART_genes.char
+>> get_large_indels_charac.py
+#output: Paramecium/CNSGenomes/large_indels_analysis/${species}_large_indels_CDS.char
+>> get_noSTOP_charc.py
+#output: Paramecium/CNSGenomes/noSTOP_analysis/${species}_noSTOP_genes.char
+>> get_frameshift_charc.py
+#output: Paramecium/CNSGenomes_protect/frameshift_analysis/${species}_frameshift_genes.char
+>>CNVnator/get_cnv_charac.py. #This is the CNVnator folder.
 
-get_large_indels_props.py
-
-get_noSTOP_charc.py
-
-get_frameshift_charc.py
-
-#get_cnv_charac.py. This is the CNVnator folder.
-
-python2.6 get_allele_freq_PTCs.py
+Step9: calculate allele frequency of the LoF haplotype accounting for samples with no coverage for some genes
+>> python2.6 get_allele_freq_PTCs.py 
+#output: Paramecium/CNSGenomes/PTC_analysis/${species}_PTC_genes_af.char
 
 get_all_genes_char.py caudatum 3_subset
 
