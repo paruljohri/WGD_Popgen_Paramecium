@@ -1,32 +1,56 @@
 # This is the pipeline used to get genes with PTCs
 #directly gets genes and indels from the vcf files:
 
-qsub run_extract_genes_from_vcf.pbs # output in my_consensus_CDS_VCF
+Step1:
+>> qsub run_extract_genes_from_vcf.pbs # output in my_consensus_CDS_VCF
+#which runs:
+>> extract_genes_from_vcf6.py //output: CNSGenomes/my_consensus_CDS_VCF/ + sample + _homo.fasta
 
-python2.6 translate_my_CDS.py
+Step2:
+>> python2.6 translate_my_CDS.py
+#output: Paramecium/CNSGenomes/my_consensus_prot_VCF
+#output: Paramecium/CNSGenomes/my_consensus_noSTART_VCF
 
-python2.6 count_PTCs.py
->>NK list (which is basically genes that are missing 1/3rd of their sequence)
+Step3:
+>> python2.6 count_PTCs.py
+#output: Paramecium/CNSGenomes/my_consensus_PTC_VCF
+#output: Paramecium/CNSGenomes/my_consensus_noSTOP_VCF
+#output: Paramecium/CNSGenomes/my_consensus_NK_VCF
+#NK list (which is basically genes that are missing 1/3rd of their sequence)
 
-python2.6 count_noSTART.py
+Step4:
+>> python2.6 count_noSTART.py
+#output: Paramecium/CNSGenomes/my_consensus_noSTART_VCF
 
-python2.6 get_large_indels_CDS.py tetraurelia ""
-python2.6 get_large_indels_CDS.py caudatum _subset
+Step5:
+>> python2.6 get_large_indels_CDS.py tetraurelia ""
+>> python2.6 get_large_indels_CDS.py biaurelia ""
+>> python2.6 get_large_indels_CDS.py sexaurelia ""
+>> python2.6 get_large_indels_CDS.py caudatum _subset
+#output: Paramecium/CNSGenomes_protect/large_indels_VCF/ + species + _large_indels_CDS.vcf
 
+Step6:
 #get genes that have a single 1 bp or 2 bp indel- there will have to be a frameshift
-python get_single_frameshift_genes.py tetraurelia
-#>>lists the genes that have an odd number of indels in my_consensus_frameshift. So this list includes genes that have PTC and do not.
+>> python get_single_frameshift_genes.py tetraurelia 3
+>> python get_single_frameshift_genes.py biaurelia 3
+>> python get_single_frameshift_genes.py sexaurelia 3
+>> python get_single_frameshift_genes.py caudatum 3_subset
+#lists the genes that have an odd number of indels in my_consensus_frameshift. So this list includes genes that have PTC and do not.
+#output: Paramecium/CNSGenomes_protect/my_consensus_frameshift/${species}_frameshift_posn.txt
+#output: Paramecium/CNSGenomes_protect/my_consensus_frameshift/${strain}.list
+
 
 #get genes that are mistranslated as a result of indels:
 python
 
+Step7:
 #get the genes with deletions, CNVnator:
 #This is in the folder CNVnator
 
-
-get_PTC_charc.py
-
-get_noSTART_charc.py
+Step8: get characteristics of genes that have Lof variants:
+>> get_PTC_charc.py
+#output: Paramecium/CNSGenomes/PTC_analysis/${species}_PTC_genes.char
+>> get_noSTART_charc.py
 
 get_large_indels_props.py
 
