@@ -48,7 +48,7 @@ for line in f_list:
 f_list.close()
 
 #Reading the ciliate_nuclear_codon.table, ciliate code:
-f_table = open("/N/dc2/scratch/pjohri/Paramecium/population/ciliate_nuclear_codon.degeneracy", 'r')
+f_table = open("/N/dc2/scratch/pjohri/Paramecium/CNSgenomes/ciliate_nuclear_codon.degeneracy", 'r')
 d_aa = {}
 for line in f_table:
         line1 = line.strip('\n')
