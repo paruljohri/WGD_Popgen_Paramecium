@@ -1,16 +1,5 @@
 # This is the pipeline used to get genes with PTCs
-#pipeline1
-qsub run_my_consensus_genomes.pbs
-
-qsub run_incorporate_indels.pbs
-
-qsub run_extract_genes_indel.pbs
-
-python2.6 translate_my_CDS.py
-
-python2.6 count_PTCs.py
-
-#pipeline2: directly gets genes and indels from the vcf files:
+#directly gets genes and indels from the vcf files:
 
 qsub run_extract_genes_from_vcf.pbs # output in my_consensus_CDS_VCF
 
