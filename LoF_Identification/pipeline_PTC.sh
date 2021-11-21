@@ -92,7 +92,8 @@ Step13: to exclude genes that have noSTOP polymorphism
 >> python get_all_genes_char_filtered_exclude_noSTOP.py caudatum 
 #output: Paramecium/CNSGenomes/${species}/all_genes_filtered_exclude_noSTOP.char
 
-
-
+Step14: Aligh orthologs and paralogs
+>> python get_ortho_para_states_filtered.py
+#output: tet_bi_sex_caud_filtered.state
 
 
