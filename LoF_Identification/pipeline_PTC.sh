@@ -63,10 +63,18 @@ Step8: get characteristics of genes that have Lof variants:
 Step9: calculate allele frequency of the LoF haplotype accounting for samples with no coverage for some genes
 >> python2.6 get_allele_freq_PTCs.py 
 #output: Paramecium/CNSGenomes/PTC_analysis/${species}_PTC_genes_af.char
+#output: Paramecium/CNSGenomes/noSTART_analysis/" + species + "_noSTART_genes_af.char
+#output: Paramecium/CNSGenomes/noSTOP_analysis/" + species + "_noSTOP_genes_af.char
+#output: Paramecium/CNSGenomes/frameshift_analysis/" + species + "_frameshift_genes_af.char
+#output: Paramecium/CNSGenomes/intact_analysis/" + species + "_intact_genes_af.char
 
-get_all_genes_char.py caudatum 3_subset
+Step10: Get the list of all genes in every species and the corresponding LoF status
+>> get_all_genes_char.py caudatum 3_subset
+#output: Paramecium/CNSGenomes/${species}/all_genes.char
+>> python get_all_genes_char_cnv.py caudatum 3_subset 2000
+#includes CNV genes with large deletions
+#output: Paramecium/CNSGenomes/${species}/all_genes_cnv_2000.char
 
-python get_all_genes_char_cnv.py caudatum 3_subset 2000
 
 python check_coverage_nonfunc_genes.py caudatum 3_subset
 
