@@ -1,4 +1,4 @@
-setwd("Work/Projects/Paper_duplicates/expression_neofunc/")
+#To get outliers or putative cnadidates of neofunctionalization
 t <- read.table("autogamy_tpm_paralogs.txt",h=T)
 
 
@@ -69,18 +69,3 @@ write.table(t_S_2sd[,c(1,2,29,30, 35, 36)], file="neofunc_T5_2SD.txt", append=F,
 write.table(t_S_2sd[,c(1,2,29,30, 37, 38)], file="neofunc_T11_2SD.txt", append=F, sep='\t', row.names=F, col.names=T, quote=F)
 write.table(t_S_2sd[,c(1,2,29,30, 39, 40)], file="neofunc_T20_2SD.txt", append=F, sep='\t', row.names=F, col.names=T, quote=F)
 
-
-#Using a fisher's exact test:
-rownum=1
-while (rownum <= dim(t)[1]){
-	m <- matrix(data=c(round(t$VK1_para1[rownum]), round(t$VK1_para2[rownum]), round(t$S1.1_para1[rownum]), round(t$S1.1_para2[rownum])), nrow=2, ncol=2)
-	fisher <- fisher.test(m, alternative="two.sided")
-	if (fisher$p.value < 0.05){
-		write.table(t[rownum,c(1,2,3,4,7, 8, 29,30, 31, 32)], file="neofunc_S_fisherexact.txt", append=T, sep='\t', row.names=F, col.names=T, quote=F)
-		}
-	rownum <- rownum + 1
-}
-
-
-#Nonfunc vs expression analysis:
-t_ptc <- t$state[which(t$status=="single" & t$xp >= 5.0 & t$xp < 6.0)]
