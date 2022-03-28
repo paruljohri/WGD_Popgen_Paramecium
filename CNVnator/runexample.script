@@ -1,0 +1,14 @@
+#!/bin/bash
+#PBS -k o
+#PBS -l nodes=1:ppn=1,vmem=100gb,walltime=10:00:00
+#PBS -M pjohri@indiana.edu
+#PBS -m abe
+#PBS -N name_of_job
+#PBS -j oe
+
+cd /path/to/directory
+
+module load name_of_module
+python2.6 name_of_program.py
+
+

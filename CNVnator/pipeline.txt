@@ -1,0 +1,39 @@
+#This is the full pipeline of CNV analysis:
+
+1. extract scaffolds:
+python get_scaffolds.py tetraurelia
+python get_scaffolds.py biaurelia
+python get_scaffolds.py sexaurelia
+
+2. Figure out what bin size to use for each species
+tet: 100
+bi: 
+sex:
+caud: 400
+
+3. run cnvnator:
+qsub run_cnvnator_tet.pbs
+
+4.filter results:
+#removes genes at the end of scaffolds:
+python filter_results.py
+
+5.get genes associated with each predicted region
+get_genes.py 
+
+#The distribution of deletions is basically normal-looking around 500-700 bp and then has a long tail for longer regions. I think the smaller regions must be more real, or of higher confidence.  
+
+So use diff cutoffs- 1000bp, 2k, 4k, 6k and 10k
+
+6. make a file of summary
+python create_deletion_summary.py tetraurelia 1000
+
+7. get characteristics of genes with deletions:
+python get_deletion_charc.py tetraurelia 1000
+
+
+
+
+
+
+

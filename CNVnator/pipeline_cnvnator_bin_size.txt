@@ -1,0 +1,95 @@
+#This is to run CNVnator; trying different command lines:
+
+#trying with one bam file at one time
+#for all chromosomes
+#-root is the output file
+go to the species directory
+1. Extracting from Bam/Sam files:
+/N/dc2/scratch/pjohri/Tools/CNVnator_v0.3.3/src/./cnvnator -genome /N/dc2/scratch/pjohri/Paramecium_protect/genomes/tetraurelia/tetraurelia_mac_51_edit.fasta -root Sample_379.root -unique -tree /N/dc2/scratch/pjohri/Paramecium_protect/kelley_data_mapped/tetraurelia/BAM_SORTED/Sample_379.sorted.bam
+
+/N/dc2/scratch/pjohri/Tools/CNVnator_v0.3.3/src/./cnvnator -genome /N/dc2/scratch/pjohri/assembly_protect/biaurelia/biaurelia_V1-4_assembly_v1.fa -root Sample_379.root -unique -tree /N/dc2/scratch/pjohri/Paramecium_protect/kelley_data_mapped/biaurelia/BAM_SORTED/Sample_379.sorted.bam
+
+/N/dc2/scratch/pjohri/Tools/CNVnator_v0.3.3/src/./cnvnator -genome /N/dc2/scratch/pjohri/assembly_protect/sexaurelia/sexaurelia_AZ8-4_assembly_v1.fasta -root Sample_126.root -unique -tree /N/dc2/scratch/pjohri/Paramecium_protect/kelley_data_mapped/sexaurelia/BAM_SORTED/Sample_126.sorted.bam
+
+1.5. Figure out the appropriate bin size
+#You can use option ‘-eval’ which will print average RD and standard deviation. We recommend to chose bin size such that the ratio is around 4.
+mkdir bin_10
+cp Sample_379.root bin_10/
+#tetraurelia:
+/N/dc2/scratch/pjohri/Tools/CNVnator_v0.3.3/src/./cnvnator -genome /N/dc2/scratch/pjohri/Paramecium_protect/genomes/tetraurelia/tetraurelia_mac_51_edit.fasta -root bin_10/Sample_379.root -his 10
+/N/dc2/scratch/pjohri/Tools/CNVnator_v0.3.3/src/./cnvnator -root bin_10/Sample_379.root -stat 10
+/N/dc2/scratch/pjohri/Tools/CNVnator_v0.3.3/src/./cnvnator -root bin_10/Sample_379.root -eval 10 > bin_10/eval.txt
+tetraurelia:
+bin size 10	ratio: 0.927749
+bin size 50	ratio: 2.84058
+bin size 100	ratio: 4.01538
+bin size 200	ratio: 5.47532
+bin size 500	ratio: 7.43914
+
+So now using bin size of 100!!!!!!
+
+#biaurelia
+/N/dc2/scratch/pjohri/Tools/CNVnator_v0.3.3/src/./cnvnator -genome /N/dc2/scratch/pjohri/assembly_protect/biaurelia/biaurelia_V1-4_assembly_v1.fa -root bin_100/Sample_379.root -his 100
+/N/dc2/scratch/pjohri/Tools/CNVnator_v0.3.3/src/./cnvnator -root bin_100/Sample_379.root -stat 100
+/N/dc2/scratch/pjohri/Tools/CNVnator_v0.3.3/src/./cnvnator -root bin_100/Sample_379.root -eval 100 > bin_100/eval.txt
+bin size 40:	ratio: 3.94707
+bin size 50:	ratio: 4.29812
+bin size 75:	ratio: 5.02964
+bin size 100:	ratio: 5.60021
+bin size 200:
+We are using bin size 50!!!!
+
+#sexaurelia:
+/N/dc2/scratch/pjohri/Tools/CNVnator_v0.3.3/src/./cnvnator -genome /N/dc2/scratch/pjohri/assembly_protect/sexaurelia/sexaurelia_AZ8-4_assembly_v1.fasta -root bin_100/Sample_126.root -his 100
+/N/dc2/scratch/pjohri/Tools/CNVnator_v0.3.3/src/./cnvnator -root bin_100/Sample_126.root -stat 100
+/N/dc2/scratch/pjohri/Tools/CNVnator_v0.3.3/src/./cnvnator -root bin_100/Sample_126.root -eval 100 > bin_100/eval.txt
+
+bin size 50:	ratio: 2.91192 
+bin size 100:	ratio: 4.04322
+bin size 200:	ratio: 5.18688
+
+We are using bin size 100!!!!!
+
+#caudatum
+bin 10: 3.45186 +- 6.10196, ratio:0.565697
+bin 50: 1.90062
+bin 100: ratio: 2.65004
+bin 150: ratio: 3.21436
+bin 200: ratio: 3.4593
+bin 400: ratio: 4.01326
+
+2.Generating a histogram
+./cnvnator [-genome name] -root file.root [-chrom name1 ...] -his bin_size [-d dir]
+
+/N/dc2/scratch/pjohri/Tools/CNVnator_v0.3.3/src/./cnvnator -genome /N/dc2/scratch/pjohri/Paramecium_protect/genomes/tetraurelia/tetraurelia_mac_51_edit.fasta -root Sample_379.root -his 100
+
+3. Calculating Statistics
+/N/dc2/scratch/pjohri/Tools/CNVnator_v0.3.3/src/./cnvnator -root Sample_379.root -stat 100
+Average RD per bin (1-22) is 1.65471 +- 1.78358 (after GC correction)
+Average RD per bin (X,Y)  is 0 +- 0 (after GC correction)
+
+3.5. Figure out the appropriate bin size
+#You can use option ‘-eval’ which will print average RD and standard deviation. We recommend to chose bin size such that the ratio is around 4.
+mkdir bin_10
+/N/dc2/scratch/pjohri/Tools/CNVnator_v0.3.3/src/./cnvnator -root bin_10/Sample_379.root -eval 10
+
+
+4.Signal Partitioning:
+./cnvnator -root file.root [-chrom name1 ...] -partition bin_size [-ngc]
+
+/N/dc2/scratch/pjohri/Tools/CNVnator_v0.3.3/src/./cnvnator -root Sample_379.root -partition 10
+
+5. CNV Calling:
+/N/dc2/scratch/pjohri/Tools/CNVnator_v0.3.3/src/./cnvnator -root Sample_379.root -chrom scaffold_260 -call 10
+
+
+6. To view a region:
+/N/dc2/scratch/pjohri/Tools/CNVnator_v0.3.3/src/./cnvnator -root Sample_379.root -chrom scaffold_47 -view 10
+
+
+
+
+
+
+
+
