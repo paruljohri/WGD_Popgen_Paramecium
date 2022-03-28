@@ -1,0 +1,29 @@
+#This is the pipeline with MEGA:
+
+1. create your command files using megaproto:
+ /N/dc2/scratch/pjohri/Tools/mega/megaproto
+ 
+
+/N/dc2/scratch/pjohri/Tools/mega/megacc -a tajima_rel_rate_test_coding.mao -d example1.meg -o example1
+/N/dc2/scratch/pjohri/Tools/mega/megacc -a tajima_rel_rate_test_coding.mao -d example1.meg -o example1_rate
+
+2. Get a file that has all orthoparalogs of tet and nearby taxa
+
+3. make fasta files of nucleotide and protein sequences
+make_fasta.py
+
+4. Run muscle to align them
+muscle_align.py
+
+5. rearrange the files so that the 3rd taxa is the outgroup:
+arrange_sequences.py
+
+6. Run mega to get tajima's relative rate (the protein one will tell you about aminoacid changes)
+mega_rate_test.py
+
+7. parse results
+parse_rate_files.py
+8. check aa divergence
+check_aa_divergence_tet.py
+check_aa_divergence_ortho.py
+
