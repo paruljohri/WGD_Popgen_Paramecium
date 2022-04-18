@@ -1,5 +1,6 @@
 # WGD_Popgen_Paramecium
-All scripts and a number of useful files used in this study and available here.
+All scripts and a number of useful files used in the manuscript - A population-genetic lens into the process of gene loss following whole-genome duplication - by Parul Johri, Jean-Francois Gout, Thomas G. Doak, Michael Lynch, are available here.\
+Please contact Parul at pjohri1@asu.edu if there are any questions.
 
 Following are the versions of the assemblies that were used in this analysis:\
 P. tetraurelia - 
