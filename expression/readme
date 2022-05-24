@@ -1,1 +1,18 @@
 This folder contains the data relative to expression level of genes during autogamy in P. tetraurelia
+
+Here is the list of sra runs used:
+ERR1827399      VK1
+ERR1827400      V1-2
+ERR1827401      S1.1
+ERR1827402      S1.2
+ERR1827403      T0.1
+ERR1827404      T0.2
+ERR1827405      T3
+ERR1827406      T5.1
+ERR1827407      T5.2
+ERR1827408      T11.1
+ERR1827409      T11.2
+ERR1827410      T20.1
+ERR1827411      T20.2
+ERR1827412      T20.3
+ERR1827413      T30
