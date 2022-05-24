@@ -1,5 +1,8 @@
 This folder contains the data relative to expression level of genes during autogamy in P. tetraurelia
 
+SRA study: https://trace.ncbi.nlm.nih.gov/Traces/sra/?study=ERP021348
+SRA Bioproject: https://www.ncbi.nlm.nih.gov//bioproject/PRJEB19343
+
 Here is the list of sra runs used:
 ERR1827399      VK1
 ERR1827400      V1-2
